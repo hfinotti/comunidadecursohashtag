@@ -45,7 +45,7 @@ def login():
 
     if form_criarconta.validate_on_submit() and 'botao_enviar_criarconta' in request.form:
         # bcrypt.check_password_hash(senha_crypt, senha) verifica se a senha é valida
-        senha_crypt = bcrypt.generate_password_hash(form_criarconta.senha.data)
+        senha_crypt = bcrypt.generate_password_hash(form_criarconta.senha.data).decode('utf-8')
         usuario = Usuario(username=form_criarconta.username.data, email=form_criarconta.email.data, senha=senha_crypt)
         database.session.add(usuario)
         database.session.commit()
